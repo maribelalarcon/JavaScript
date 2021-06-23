@@ -42,7 +42,8 @@
 //     return precio+ (precio * intereses)/100;
 // }
 
-//Desafio 5 "Incorporar Onjetos"
+//Desafio 5 "Incorporar Objetos"
+
 class Vaso{
     constructor(elegirColor, unidades){
         this.elegirColor = elegirColor;

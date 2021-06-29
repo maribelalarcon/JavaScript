@@ -99,7 +99,7 @@ class Carrito{
         this.productos = this.productos.map(producto => {
             producto.sumarIva()
             return producto;
-        }
+        })
     }
  
 }

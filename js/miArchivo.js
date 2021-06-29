@@ -44,19 +44,83 @@
 
 //Desafio 5 "Incorporar Objetos"
 
-class Vaso{
-    constructor(elegirColor, unidades){
-        this.elegirColor = elegirColor;
-        this.unidades = unidades;
-        this.precio = 200;
+// class Vaso{
+//     constructor(elegirColor, unidades){
+//         this.elegirColor = elegirColor;
+//         this.unidades = unidades;
+//         this.precio = 200;
+//     }
+//     compro(){
+//         this.precioAPagar = (this.precio * this.unidades);
+//         alert("El vaso que selecciono es de color: "  + (this.elegirColor) +"\n"+ (this.unidades) + "  unidades \n El precio a pagar es " + (this.precioAPagar));
+//     }
+// }
+
+// let elegirColor = prompt("Que color de vaso desea elegir?");
+// let unidades = prompt("Cuantas unidades desea llevar?")
+// const vaso1 = new Vaso (elegirColor,unidades);
+// vaso1.compro()
+
+//Desafio 6 "CONCEPTO DE OBJETO"
+
+class Producto {
+    constructor(nombre, precio){
+        this.nombre = nombre;
+        this.precio = parseFloat(precio);
+        this.disponible = true;
     }
-    compro(){
-        this.precioAPagar = (this.precio * this.unidades);
-        alert("El vaso que selecciono es de color: "  + (this.elegirColor) +"\n"+ (this.unidades) + "  unidades \n El precio a pagar es " + (this.precioAPagar));
+
+    vender(){
+        this.disponible = false;
     }
+
+    sumarIva (){
+        this.precio = this.precio * 1.21;
+    }
+
 }
 
-let elegirColor = prompt("Que color de vaso desea elegir?");
-let unidades = prompt("Cuantas unidades desea llevar?")
-const vaso1 = new Vaso (elegirColor,unidades);
-vaso1.compro()
+class Carrito{
+    constructor(){
+        this.productos = []
+    }
+    agregarProducto (producto){
+        this.productos.push(producto);
+    }
+
+    mostrarProductos(){
+        for (let producto of this.productos){
+            console.log ("El producto ingresado es: " + producto.nombre );
+            console.log ("El precio del producto con Iva es: $" + producto.precio);
+        }
+    }
+
+    sumarIva (){
+        this.productos = this.productos.map(producto => {
+            producto.sumarIva()
+            return producto;
+        }
+    }
+ 
+}
+
+const miCarrito = new Carrito();
+let continuar = "SI";
+do {
+    let nombre = prompt ("Ingrese el nombre del producto a comprar");
+    let precioIngresado = prompt("Ingrese el precio del producto");
+    const miProducto = new Producto(nombre, precioIngresado);
+    miCarrito.agregarProducto(miProducto);
+    continuar = prompt("Desea seguir agregando productos? \n SI - NO")
+} while(continuar == "SI")
+    
+miCarrito.sumarIva(); 
+miCarrito.mostrarProductos();
+
+
+
+
+
+
+
+

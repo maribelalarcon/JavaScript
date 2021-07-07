@@ -15,19 +15,13 @@ class Producto {
     }
 }
  //Agregar carrito
-class Carrito{
+class Carrito {
     constructor(){
         this.productos = []
     }
+
     agregarProducto (producto){
         this.productos.push(producto);
-    }
-    //document.write ("<h3> El producto y precio es...")
-    mostrarProductos(){
-        for (let producto of this.productos){
-            document.write("<ul> <li> El producto ingresado es: " + producto.nombre + "</li>")
-            document.write("<li> El precio del producto con Iva es: $" + producto.precio + "</li> </ul>");
-        }
     }
 
     sumarIva (){
@@ -59,8 +53,6 @@ do {
 } while(continuar == "SI")
     
 miCarrito.sumarIva(); 
-miCarrito.mostrarProductos();
-
 
 //solicitar tipo de tarjeta y cantidad a cuotas a pagar. Luego mostrar valor. Document.write
 
@@ -72,9 +64,18 @@ const intereses = interesPorTarjeta(tarjeta);
      alert("No trabajamos con esa tarjeta")
  }else{
      const total = miCarrito.calcularTotal();
-     document.write("<ul> <li> El precio total con interes es de $" + total + "</li>");
-     document.write("<li>El valor de cada cuota es de $" + total / cuotas + "</li> </ul>");
-    
+     
+    //TRABAJE SOBRE DESAFIO 8 -DOM-
+     const elementoListaDeProductos = document.getElementById("lista-de-productos")
+     const elementoTotal = document.getElementById("total")
+
+     for (let producto of miCarrito.productos) {
+         const elementoProducto = document.createElement("li");
+         elementoProducto.innerText = `${producto.nombre}: ($${producto.precio})`;
+         elementoListaDeProductos.appendChild(elementoProducto);
+     }
+
+     elementoTotal.innerText = `$${total}`;
  }
 
  function interesPorTarjeta(tarjeta){

@@ -3,9 +3,9 @@
 // los productos: nombre, descripcion, precio, imagen, etc.
 
 const productos = [
-    { id: "1", nombre: "Taza", precio: 200, imagen: "../images/taza.jpeg"},
-    { id: "2", nombre: "Plato", precio: 500, imagen: "../images/platos.jpeg"},
-    { id: "3", nombre: "Silla", precio: 1200, imagen: "../images/silla.jpg"},
+    { id: "1", nombre: "Taza", precio: 200, imagen: "images/taza.jpeg"},
+    { id: "2", nombre: "Plato", precio: 500, imagen: "images/platos.jpeg"},
+    { id: "3", nombre: "Silla", precio: 1200, imagen: "images/silla.jpg"},
 ]
 
 // arreglo vacio que va a representar los productos

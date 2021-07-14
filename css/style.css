@@ -1684,4 +1684,10 @@ h1, h2, h3, h4, h5, h6, figure {
   opacity: 0;
 }
 
+/* Customizado */
+#cantidad-carrito {
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
 /*# sourceMappingURL=style.css.map */

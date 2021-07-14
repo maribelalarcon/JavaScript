@@ -1,101 +1,78 @@
-// "CONCEPTO DE OBJETO"
-class Producto {
-    constructor(nombre, precio){
-        this.nombre = nombre;
-        this.precio = parseFloat(precio);
-        this.disponible = true;
-    }
+// arreglo de objetos "producto", cada objeto
+// del arreglo va a tener todas las propiedades que necesitan
+// los productos: nombre, descripcion, precio, imagen, etc.
 
-    vender(){
-        this.disponible = false;
-    }
+const productos = [
+    { id: "1", nombre: "Taza", precio: 200, imagen: "../images/taza.jpeg"},
+    { id: "2", nombre: "Plato", precio: 500, imagen: "../images/platos.jpeg"},
+    { id: "3", nombre: "Silla", precio: 1200, imagen: "../images/silla.jpg"},
+]
 
-    sumarIva (){
-        this.precio = this.precio * 1.21;
-    }
-}
- //Agregar carrito
-class Carrito {
-    constructor(){
-        this.productos = []
-    }
+// arreglo vacio que va a representar los productos
+// en el carrito
+let carrito = [];
 
-    agregarProducto (producto){
-        this.productos.push(producto);
-    }
+const elementoCantidadCarrito = document.getElementById("cantidad-carrito");
 
-    sumarIva (){
-        this.productos = this.productos.map(producto => {
-            producto.sumarIva()
-            return producto;
-        })
-    }
+const carritoJson = localStorage.getItem("carrito");
 
-    calcularTotal(){
-        let total= 0;
-        for(const producto of this.productos){
-            total = total + producto.precio;
-        }
-        return total;
-    }
- 
-}
-//pedir una opcion a ingresar
-const miCarrito = new Carrito();
-
-let continuar = "SI";
-do {
-    let nombre = prompt ("Ingrese el nombre del producto a comprar");
-    let precioIngresado = prompt("Ingrese el precio del producto");
-    const miProducto = new Producto(nombre, precioIngresado);
-    miCarrito.agregarProducto(miProducto);
-    continuar = prompt("Desea seguir agregando productos? \n SI - NO")
-} while(continuar == "SI")
-    
-miCarrito.sumarIva(); 
-
-//solicitar tipo de tarjeta y cantidad a cuotas a pagar. Luego mostrar valor. Document.write
-
-const tarjeta = prompt("Que tarjeta tiene?").toLowerCase();
-const cuotas = parseInt(prompt("En cuantas cuotas desea pagar?"));
-const intereses = interesPorTarjeta(tarjeta);
-
- if(intereses == null){
-     alert("No trabajamos con esa tarjeta")
- }else{
-     const total = miCarrito.calcularTotal();
-     
-    //TRABAJE SOBRE DESAFIO 8 -DOM-
-     const elementoListaDeProductos = document.getElementById("lista-de-productos")
-     const elementoTotal = document.getElementById("total")
-
-     for (let producto of miCarrito.productos) {
-         const elementoProducto = document.createElement("li");
-         elementoProducto.innerText = `${producto.nombre}: ($${producto.precio})`;
-         elementoListaDeProductos.appendChild(elementoProducto);
-     }
-
-     elementoTotal.innerText = `$${total}`;
- }
-
- function interesPorTarjeta(tarjeta){
-     if(tarjeta == "santander"){
-        return 20;
-     }else if (tarjeta == "visa"){
-         return 10;
-     }else if (tarjeta == "mastercard"){
-        return 15;
-     }else {
-         return null;
-     } }
-
-function calcularTotal(precio, intereses){
-    return precio + (precio * intereses) / 100;
+if (carritoJson !== null) {
+    carrito = JSON.parse(carritoJson);
 }
 
+const actualizarCarrito = () => {
 
+    let total = 0;
 
+    carrito.forEach(producto => {
+        total = total + producto.precio;
+    });
 
+    elementoCantidadCarrito.innerText = `${carrito.length} ($${total})`;
 
+    const carritoJson = JSON.stringify(carrito);
+    localStorage.setItem("carrito", carritoJson);
+}
 
+//funcion que tome los datos del arreglo,
+// y los inserte en el DOM
 
+const contendorDeProductos = document.getElementById("productos");
+
+const actualizarProductos = () => {
+    for (let producto of productos) {
+        const elProducto = document.createElement("div");
+        elProducto.innerHTML = 
+            `<div class="col-md-4 text-center animate-box">
+                <div class="product">
+                    <div class="product-grid" style="background-position:center; background-image:url(${producto.imagen});">
+                        <div class="inner">
+                            <p>
+                                <a href="#" data-id="${producto.id}" class="icon boton-agregar-carrito"><i class="icon-shopping-cart"></i></a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="desc">
+                        <h3><a href="single.html">${producto.nombre}</a></h3>
+                        <span class="price">$${producto.precio}</span>
+                    </div>
+                </div>
+            </div>`;
+        contendorDeProductos.appendChild(elProducto);
+    }
+}
+
+actualizarProductos();
+actualizarCarrito();
+
+const botonesCarrito = document.getElementsByClassName("boton-agregar-carrito");
+
+for (let boton of botonesCarrito) {
+    boton.addEventListener("click", (event) => {
+        const id = event.currentTarget.getAttribute("data-id");
+        producto = productos.find((p) => p.id === id);
+        carrito.push(producto);
+        actualizarCarrito();
+    })
+}

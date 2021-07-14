@@ -44,9 +44,6 @@
 
 	</head>
 	<body>
-		
-	
-		
 		<div id="page">
 			<nav class="fh5co-nav" role="navigation">
 				<div class="container">
@@ -85,7 +82,7 @@
 									</span>
 									</div>
 								</li>
-								<li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
+								<li class="shopping-cart"><a href="#" class="cart"><span><small id="cantidad-carrito">0</small><i class="icon-shopping-cart"></i></span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -93,39 +90,41 @@
 			</nav>
 		</div>
 
-		<div>
-			<h1>Carrito</h1>
-
-			<ul id="lista-de-productos"></ul>
-			<p>TOTAL: <strong id="total"></strong></p>
-
-		</div>
+		<div class="container">
+			<div>
+				<h1>Carrito</h1>
 	
-		<div id="fh5co-started">
-			<div class="container">
-				<div class="row animate-box">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Sucribite</h2>
-						<p>Si deseas recibir novedades y promociones, dejanos tu email.</p>
+			</div>
+	
+			<div class="row" id="productos"></div>
+		
+			<div id="fh5co-started">
+				<div class="container">
+					<div class="row animate-box">
+						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+							<h2>Sucribite</h2>
+							<p>Si deseas recibir novedades y promociones, dejanos tu email.</p>
+						</div>
 					</div>
-				</div>
-				<div class="row animate-box">
-					<div class="col-md-8 col-md-offset-2">
-						<form class="form-inline">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label for="email" class="sr-only">Email</label>
-									<input type="email" class="form-control" id="email" placeholder="Email">
+					<div class="row animate-box">
+						<div class="col-md-8 col-md-offset-2">
+							<form class="form-inline">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label for="email" class="sr-only">Email</label>
+										<input type="email" class="form-control" id="email" placeholder="Email">
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<button type="submit" class="btn btn-default btn-block">Subscribite</button>
-							</div>
-						</form>
+								<div class="col-md-6 col-sm-6">
+									<button type="submit" class="btn btn-default btn-block">Subscribite</button>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 
 		<footer id="fh5co-footer" role="contentinfo">
 			<div class="container">

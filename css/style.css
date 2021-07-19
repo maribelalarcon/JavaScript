@@ -1690,4 +1690,8 @@ h1, h2, h3, h4, h5, h6, figure {
   white-space: nowrap;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 /*# sourceMappingURL=style.css.map */

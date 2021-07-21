@@ -39,18 +39,33 @@ $("#productos .btn").on('click',function(evento) {
     const idProducto = evento.target.id;
     const producto = productos.find((p)=>{
         return p.id === idProducto;
-    //  //find con funcion flecha y desestructuracion
-    // let objetoBuscado = carrito.find(({id) =>{
-    //     id == producto.id);
-    // //underfined si no lo encuentra
-    // console.log("El objeto:");
-    // console.log(objetoBuscado);
-    // })
+    });
     console.log("producto ", producto);
     //agregar producto al carrito
     carrito.push(producto);
     objetoBuscado();
     actualizarCarrito();
+})
+
+
+function suscribir() {
+    $("#alerta-suscripcion").removeClass("hide");
+    $("#email").val("");
+}
+
+
+// Suscripcion
+$("#email").on("keypress", (evento) => {
+    if (evento.key === "Enter") {
+        suscribir();
+    }
+});
+
+$("#boton-suscribirse").on("click", () => {
+    suscribir();
+});
+
+
 
 
 

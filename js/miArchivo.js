@@ -43,7 +43,6 @@ $("#productos .btn").on('click',function(evento) {
     console.log("producto ", producto);
     //agregar producto al carrito
     carrito.push(producto);
-    objetoBuscado();
     actualizarCarrito();
 })
 

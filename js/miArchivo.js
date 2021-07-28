@@ -92,6 +92,24 @@ $("#boton-suscribirse").on("click", () => {
     suscribir();
 });
 
+//Declaramos la url que vamos a usar para el GET
+const URLGET = "https://jsonplaceholder.typicode.com/photos"
+//Agregamos un botón con jQuery
+$("#productos").prepend('<button id="btn1">GET</button>');
+//Escuchamos el evento click del botón agregado
+$("#btn1").click(() => { 
+    $.get(URLGET, function (respuesta, estado) {
+          if(estado === "success"){
+            let misDatos = respuesta;
+            for (const dato of misDatos) {
+              $("#productos").prepend(`<div>
+                                   <h3>${dato.url}</h3>
+                                   <p> ${dato.title}</p>
+                                  </div>`);
+            }  
+          }
+    });
+});
 
 
 

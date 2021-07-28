@@ -9,7 +9,13 @@ const productos = [
     { id: "3", nombre: "Silla", precio: 1200, imagen: "images/silla.jpg"},
 ]
 
-let carrito = [];
+const carritoJson = localStorage.getItem("carrito");
+const carrito = carritoJson ? JSON.parse(carritoJson) : [];
+
+let cantidad = 0;
+carrito.forEach(p => cantidad += p.cantidad);
+
+$("#cantidad-carrito").text(cantidad);
 
 //funcion para agregar la propiedad cantidad al objeto literal para el carriti
 function agregarItem(objeto){
@@ -21,7 +27,11 @@ function agregarItem(objeto){
 //Funcion Actualizar Carrito
 function actualizarCarrito(){
     console.log("carrito", carrito.length)
-    $("#cantidad-carrito").text(carrito.length);
+    const carritoJson = JSON.stringify(carrito);
+    localStorage.setItem("carrito", carritoJson);
+    let cantidad = 0;
+    carrito.forEach(producto => cantidad += producto.cantidad);
+    $("#cantidad-carrito").text(cantidad);
 }
 
 //Recorro producto
@@ -36,14 +46,32 @@ for(const producto of productos) {
 //definir funcion cuando ocurre evento
 $("#productos .btn").on('click',function(evento) {
     console.log (`Compraste `,evento.target.id);
+
     const idProducto = evento.target.id;
     const producto = productos.find((p)=>{
         return p.id === idProducto;
     });
+
     console.log("producto ", producto);
-    //agregar producto al carrito
-    carrito.push(producto);
+
+    const productoCarrito = carrito.find((p)=>{
+        return p.id === idProducto;
+    });
+
+    if (productoCarrito) {
+        productoCarrito.cantidad = productoCarrito.cantidad + 1;
+    } else {
+        producto.cantidad = 1;
+        carrito.push(producto);
+    }
+
     actualizarCarrito();
+
+
+    //agregar producto al carrito
+    $('.alerta').fadeIn();
+    setTimeout(() => $('.alerta').fadeOut(), 1000);
+
 })
 
 

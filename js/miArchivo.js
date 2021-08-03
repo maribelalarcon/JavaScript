@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $("#boton-cargar-productos").click(() => {
 
-        $.get("/productos.json", function(respuesta, estado) {
+        $.get("productos.json", function(respuesta, estado) {
 
 
             // agregar "producto" por json

@@ -9,12 +9,12 @@ class Producto {
 }
 
 
+// Esperamos a que la pagina este lista
 $(document).ready(function(){
 
     $("#boton-cargar-productos").click(() => {
 
         $.get("productos.json", function(respuesta, estado) {
-
 
             // agregar "producto" por json
             const productos = [];
@@ -27,8 +27,11 @@ $(document).ready(function(){
             })
     
             const carritoJson = localStorage.getItem("carrito");
+
+            // si hay datos en localStorage los parseamos, si no por defecto usamos un arreglo vacio
             const carrito = carritoJson ? JSON.parse(carritoJson) : [];
         
+            // contamos la cantidad de productos
             let cantidad = 0;
             carrito.forEach(p => cantidad += p.cantidad);
         
@@ -64,17 +67,21 @@ $(document).ready(function(){
             $("#productos .btn").on('click',function(evento) {
                 console.log (`Compraste `,evento.target.id);
         
+                // obtenemos el id del producto clickeado
                 const idProducto = evento.target.id;
+
+                // buscamos si ese producto existe en la lista de productos
                 const producto = productos.find((p)=>{
                     return p.id === idProducto;
                 });
         
-                console.log("producto ", producto);
-        
+                // verificamos si ese producto ya existe en el carrito
                 const productoCarrito = carrito.find((p)=>{
                     return p.id === idProducto;
                 });
         
+                // si el producto ya esta en el carrito, incrementamos la cantidad
+                // si no lo agregamos al carrito
                 if (productoCarrito) {
                     productoCarrito.cantidad = productoCarrito.cantidad + 1;
                 } else {
@@ -82,6 +89,8 @@ $(document).ready(function(){
                     carrito.push(producto);
                 }
         
+
+                // actualizamos el dom
                 actualizarCarrito();
         
         

@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     const carritoJson = localStorage.getItem("carrito");
-    const carrito = JSON.parse(carritoJson);
+    const carrito = carritoJson ? JSON.parse(carritoJson) : [];
 
     let cantidad = 0;
     carrito.forEach(p => cantidad += p.cantidad);

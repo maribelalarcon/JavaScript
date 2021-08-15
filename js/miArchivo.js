@@ -1,3 +1,14 @@
+
+class Producto {
+    constructor({ id, nombre, precio, imagen }) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imagen = imagen;
+    }
+}
+
+
 $(document).ready(function(){
 
     $("#boton-cargar-productos").click(() => {
@@ -6,7 +17,14 @@ $(document).ready(function(){
 
 
             // agregar "producto" por json
-            const productos = respuesta;
+            const productos = [];
+
+            // recibimos los productos del JSON y creamos instancias
+            // de la clase Producto para cada uno
+            respuesta.forEach((productoRespuesta) => {
+                const p = new Producto(productoRespuesta);
+                productos.push(p);
+            })
     
             const carritoJson = localStorage.getItem("carrito");
             const carrito = carritoJson ? JSON.parse(carritoJson) : [];

@@ -31,6 +31,9 @@ $(document).ready(() => {
     elementoProductos.append(elTotal);
 
     $("#boton-comprar").on("click", () => {
-        alert("Compra realizada correctamente!")
+        $("#contenedor-carrito").html(`
+            <h2>Gracias por tu compra!</h2>
+            <p>Nos comunicaremos a la brevedad para completar tu checkout</p>
+        `)
     });
 });
